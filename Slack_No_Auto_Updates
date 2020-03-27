@@ -1,0 +1,15 @@
+#!/bin/bash
+consoleuser=$(stat -f%Su /dev/console)
+File=/Users/$consoleuser/Library/Preferences/com.tinyspeck.slackmacgap.plist
+InFile=$(cat $File | grep -c "SlackNoAutoUpdates")
+
+# Si Le fichier n'est pas présent, il lance la commande.
+	if [ ! -f "$File" ]
+then
+	sudo -u $consoleuser defaults write $File SlackNoAutoUpdates -bool YES
+	elif [[ $isInFile -eq 0 ]]
+then
+	sudo -u $consoleuser defaults write $File SlackNoAutoUpdates -bool YES
+fi
+
+exit 0
